@@ -1,47 +1,28 @@
-use anyhow::Result;
-use serde::Deserialize;
 use std::process::Command;
+use serde::Deserialize;
 
 pub struct Disp {
     pub name: String,
-    pub refresh_rate: f32,
+    pub refreshRate: f32,
     pub w: u16,
     pub h: u16,
-    pub active: bool,
+    pub focused: bool,
+    pub disabled: bool,
 }
 
-#[derive(Deserialize)]
-struct Moniter {
-    name: String,
-    refresh_rate: f32,
-    w: u16,
-    h: u16,
-    active: bool,
-}
-
-
-fn get_displays() -> Result<Vec<Disp>> {
+pub fn hypr(args: &[&str]) -> String {
     let output = Command::new("hyprctl")
-        .args(["monitors", "-j"])
-        .output()?;
+        .args(args)
+        .output()
+        .expect("hyprctl's err not mine ");
 
-    if !output.status.success() {
-        anyhow::bail!("hyprctl err");
-    }
+    String::from_utf8(output.stdout)
+        .expect("hyprctl returned invalid utf8")
+}
 
-    let monitors: Vec<HyprMonitor> =
-        serde_json::from_slice(&output.stdout)?;
+pub fn get_disp() -> Vec<Disp> {
+    let output = hypr(&["monitors", "-j"]);
 
-    let displays = monitors
-        .into_iter()
-        .map(|m| Disp {
-            name: m.name,
-            refresh_rate: m.refresh_rate,
-            w: m.w,
-            h: m.h,
-            active: m.active,
-        })
-        .collect();
-
-    Ok(displays)
+    serde_json::from_str(&output)
+        .expect("cant parse monitor data")
 }
