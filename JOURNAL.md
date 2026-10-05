@@ -25,4 +25,5 @@ i made it a codeblock but the comments "()" arent valid so dont copy these thing
 now imma gonna start building the base
 
 ok cargo init'd , gonna make all the things in js one file now and distribute later Yeah ik thts easier but still i like redistribute later one.
- 
+
+so build the initial struct , btw i used u8 for height and width at first but it doesnt store 1920 or 1080 so i used u16 as it is better than u32 atleast i think so , also i used f32 for the refreash rate as hyprland give things like 59.64 sometimes , wait wtf am i explain? its basics nah i dont needa explain, nah, i'wd build .  
