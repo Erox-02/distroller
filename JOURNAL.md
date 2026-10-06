@@ -157,3 +157,6 @@ ohhh it worked finally :
 
 but wait the 2nd moniter was supposed to be 100hz default , ik its downsampled because of the other moniter , anyways i 'll fix tht later hmhm now imma gonna make the other features .
 
+okk broke main.rs and made ls.rs and main.rs , currently i kept the hypr func (the one to execute hyprctl with structed args as u want ) in ls as idh any hypr.rs , but i will soon move tht to somewhere else as ls.rs is for listing only , yeah thts why i named it ls , i didnt steal the name of ls bash command , wait i kinda did to be honest .
+
+anyways i kept the old main.rs as ~main* for now i will del tht on next commit .
