@@ -124,7 +124,7 @@ ok added another struct to copy the vals to new struct wait wait , why am i such
 [erox@archbtw ~]$ 
 ```
 
-heh i am a genious , made the best struct
+made the best struct
 
 pub struct Disp {
     pub name: String,
@@ -136,3 +136,24 @@ pub struct Disp {
 }
 
 now just gonna fetch frm the hyprctl output and print done 
+
+ok added the code to run hyprlctl monitors -j and fetch the info , but then i got err js because i forgot to add the deserializer and then after i fixed lol cargo toml didnt have derde lol , and now i imported it as macro another lol , and now i forgot to import the feature deserialize with serde . 
+bruh this time i js got a err of version mismatch tht was added by cargo  , how life can be worser?
+
+```err
+[erox@archbtw distroller]$ cargo run
+    Updating crates.io index
+error: failed to select a version for the requirement `serde_json = "^1.0.229"`
+candidate versions found which didn't match: 1.0.151, 1.0.150, 1.0.149, ...
+location searched: crates.io index
+required by package `distroller v0.1.0 (/home/erox/distroller)`
+help: if you are looking for the prerelease package it needs to be specified explicitly
+    serde_json = { version = "0.9.0-rc3" }
+[erox@archbtw distroller]$ 
+```
+ohhh it worked finally :
+
+![it works ](assets/workd.png)
+
+but wait the 2nd moniter was supposed to be 100hz default , ik its downsampled because of the other moniter , anyways i 'll fix tht later hmhm now imma gonna make the other features .
+

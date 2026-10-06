@@ -1,11 +1,13 @@
 use std::process::Command;
 use serde::Deserialize;
 
+#[derive(Deserialize)]
 pub struct Disp {
+    pub id: u8,
     pub name: String,
     pub refreshRate: f32,
-    pub w: u16,
-    pub h: u16,
+    pub width: u16,
+    pub height: u16,
     pub focused: bool,
     pub disabled: bool,
 }
@@ -25,4 +27,18 @@ pub fn get_disp() -> Vec<Disp> {
 
     serde_json::from_str(&output)
         .expect("cant parse monitor data")
+}
+
+fn main() {
+    let displ = get_disp();
+    for (i, disp) in displ.iter().enumerate() {
+        println!(
+            "{}: {} {}x{} @ {:.2}Hz",
+            disp.id,
+            disp.name,
+            disp.width,
+            disp.height,
+            disp.refreshRate
+        );
+    }
 }
