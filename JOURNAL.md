@@ -160,3 +160,15 @@ but wait the 2nd moniter was supposed to be 100hz default , ik its downsampled b
 okk broke main.rs and made ls.rs and main.rs , currently i kept the hypr func (the one to execute hyprctl with structed args as u want ) in ls as idh any hypr.rs , but i will soon move tht to somewhere else as ls.rs is for listing only , yeah thts why i named it ls , i didnt steal the name of ls bash command , wait i kinda did to be honest .
 
 anyways i kept the old main.rs as ~main* for now i will del tht on next commit .
+
+ok after a lot of research , i found `hyprctl eval 'hl.monitor({ output = "eDP-1", disabled = true })'` works to turn of the display so i can make a function inside my new io.rs and use it to turn off on on the display hmhm.
+
+
+# Oct 8
+
+ok today imma gonna work on the turn off and on function 
+
+done it works , i js used hyprctl command to do it , it wasnt much hard 
+
+after finding some repos i found this `hyprctl eval 'hl.monitor({ output = "eDP-1", disabled = true })'` it ran well so i made a file named 
+io.rs and implanted on main done and now  it works though its not usable on terminal , cargo run does the work fine .
