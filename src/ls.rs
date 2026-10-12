@@ -23,7 +23,7 @@ pub fn hypr(args: &[&str]) -> String {
 }
 
 pub fn get_disp() -> Vec<Disp> {
-    let output = hypr(&["monitors", "-j"]);
+    let output = hypr(&["monitors", "all", "-j"]);
 
     serde_json::from_str(&output)
         .expect("cant parse monitor data")

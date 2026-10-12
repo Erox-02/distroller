@@ -5,9 +5,6 @@ Project Title: "Distroller"
 
 ---
 
-
-# Oct 6
-
 Today i got a monitor (thx stardance) and connected it to my laptop right away , but my hyprland.lua didnt had anything to assign  to the moniter , so it just went with the default one , a diff workspace and i had to configure  it a lot then finally got it to work but now i think i will make a rust based cli tool to automate those things . Easy right? for users not me lol .
 
 i made a basic poc script idea for now
@@ -163,12 +160,13 @@ anyways i kept the old main.rs as ~main* for now i will del tht on next commit .
 
 ok after a lot of research , i found `hyprctl eval 'hl.monitor({ output = "eDP-1", disabled = true })'` works to turn of the display so i can make a function inside my new io.rs and use it to turn off on on the display hmhm.
 
-
-# Oct 8
-
 ok today imma gonna work on the turn off and on function 
 
 done it works , i js used hyprctl command to do it , it wasnt much hard 
 
 after finding some repos i found this `hyprctl eval 'hl.monitor({ output = "eDP-1", disabled = true })'` it ran well so i made a file named 
 io.rs and implanted on main done and now  it works though its not usable on terminal , cargo run does the work fine .
+
+ok now  i am working on it to use it as cli tool not js cargo run and pray so i think i will start with passing a value in cargo for now .
+
+ok did some work and got the refresh rate thing working too , now cargo run --list , cargo run -- scale and refresh works , and works pretty fine i will need to add some restrictions because scalling max is 10 , higher gives hypr err , higher ref rate on external hdmi = no signal also disabling eDP kills the waybar too oh thts my fault lemme fix my own waybar , done took a lil time but fixed , also i changed hyprctl monitors -j to hyprctl monitors all -j because after disabling one moniter , hyprctl monitors was ignoring the disabled one

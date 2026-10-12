@@ -16,14 +16,17 @@ pub fn disable(disp: &Disp) {
     set_disp(disp, true);
 }
 
+
 pub fn refresh(disp: &Disp, refresh_rate: f32) {
     let code = format!(
-        "hl.monitor({{ output = \"{}\", refresh = {} }})",
-        disp.name, refresh_rate
+        "hl.monitor({{ output = \"{}\", mode = \"{}x{}@{}\" }})",
+        disp.name, disp.width, disp.height, refresh_rate
     );
 
+    println!("Running: {code}");
     hypr(&["eval", &code]);
 }
+
 
 pub fn scale(disp: &Disp, scale: f32) {
     let code = format!(
