@@ -170,3 +170,4 @@ io.rs and implanted on main done and now  it works though its not usable on term
 ok now  i am working on it to use it as cli tool not js cargo run and pray so i think i will start with passing a value in cargo for now .
 
 ok did some work and got the refresh rate thing working too , now cargo run --list , cargo run -- scale and refresh works , and works pretty fine i will need to add some restrictions because scalling max is 10 , higher gives hypr err , higher ref rate on external hdmi = no signal also disabling eDP kills the waybar too oh thts my fault lemme fix my own waybar , done took a lil time but fixed , also i changed hyprctl monitors -j to hyprctl monitors all -j because after disabling one moniter , hyprctl monitors was ignoring the disabled one
+

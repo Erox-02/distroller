@@ -35,3 +35,25 @@ pub fn scale(disp: &Disp, scale: f32) {
     );
     hypr(&["eval", &code]);
 }
+
+pub fn sup_refresh(disp: &Disp, refresh_rate: f32) -> bool {
+    if !refresh_rate.is_finite() || refresh_rate <= 0.0 {
+        return false;
+    }
+    let resolution = format!("{}x{}", disp.width, disp.height);
+
+    disp.available_modes.iter().any(|mode| {
+        let Some((mode_resolution, rate)) = mode.split_once('@') else {
+            return false;
+        };
+
+        let Some(rate) = rate
+            .strip_suffix("Hz")
+            .and_then(|rate| rate.parse::<f32>().ok())
+        else {
+            return false;
+        };
+
+        mode_resolution == resolution && (rate - refresh_rate).abs() < 0.1
+    })
+}

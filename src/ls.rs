@@ -10,7 +10,10 @@ pub struct Disp {
     pub height: u16,
     pub focused: bool,
     pub disabled: bool,
+    #[serde(rename = "availableModes")]
+    pub available_modes: Vec<String>,
 }
+
 
 pub fn hypr(args: &[&str]) -> String {
     let output = Command::new("hyprctl")

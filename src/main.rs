@@ -1,4 +1,3 @@
-
 mod ls;
 mod io;
 
@@ -36,12 +35,25 @@ fn main() {
                 return;
             };
 
+            if command == "scale" && (!value.is_finite() || value <= 0.0 || value > 10.0) {
+                eprintln!("scale is supposed to be bigger than 0 and smaller than 10.");
+                return;
+            }
+
             let displ = ls::get_disp();
 
             let Some(disp) = number.checked_sub(1).and_then(|i| displ.get(i)) else {
                 eprintln!("moniter number out of range.");
                 return;
             };
+
+            if command == "refresh" && !io::sup_refresh(disp, value) {
+                eprintln!(
+                    "Unsupported refresh rate {value}Hz for {} at {}x{}.",
+                    disp.name, disp.width, disp.height
+                );
+                return;
+            }
 
             if command == "scale" {
                 io::scale(disp, value);
@@ -56,7 +68,7 @@ fn main() {
             let command = args[0].as_str();
 
             let Some(selection) = args.get(1) else {
-                eprintln!("Usage: distroller {command} <monitor number(s)>");
+                eprintln!("try +=> distroller {command} <monitor number(s)>");
                 return;
             };
 
@@ -64,20 +76,32 @@ fn main() {
                 selection.split(',').map(str::parse).collect();
 
             let Ok(numbers) = numbers else {
-                eprintln!("Invalid monitor number(s).");
+                eprintln!("not valid monitor number(s).");
                 return;
             };
 
             if numbers.is_empty() {
-                eprintln!("Select at least one monitor.");
+                eprintln!("select at least one monitor.");
                 return;
             }
 
             if command == "disable" && numbers.len() != 1 {
-                eprintln!("Disable accepts only one monitor.");
+                eprintln!("disable accepts only one monitor.");
                 return;
             }
 
+                eprintln!("select at least one monitor.");
+                return;
+            }
+
+            if command == "disable" && numbers.len() != 1 {
+                eprintln!("disable accepts only one monitor.");
+                return;
+            }
+
+            let displ = ls::get_disp();
+
+            for number in numbers {
             let displ = ls::get_disp();
 
             for number in numbers {
