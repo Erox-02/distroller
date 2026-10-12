@@ -15,3 +15,20 @@ pub fn enable(disp: &Disp) {
 pub fn disable(disp: &Disp) {
     set_disp(disp, true);
 }
+
+pub fn refresh(disp: &Disp, refresh_rate: f32) {
+    let code = format!(
+        "hl.monitor({{ output = \"{}\", refresh = {} }})",
+        disp.name, refresh_rate
+    );
+
+    hypr(&["eval", &code]);
+}
+
+pub fn scale(disp: &Disp, scale: f32) {
+    let code = format!(
+        "hl.monitor({{ output = \"{}\", scale = {} }})",
+        disp.name, scale
+    );
+    hypr(&["eval", &code]);
+}
