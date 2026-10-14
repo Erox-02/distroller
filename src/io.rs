@@ -42,7 +42,7 @@ pub fn sup_refresh(disp: &Disp, refresh_rate: f32) -> bool {
     }
     let resolution = format!("{}x{}", disp.width, disp.height);
 
-    disp.available_modes.iter().any(|mode| {
+    disp.available.iter().any(|mode| {
         let Some((mode_resolution, rate)) = mode.split_once('@') else {
             return false;
         };

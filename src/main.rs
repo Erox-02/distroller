@@ -1,3 +1,4 @@
+
 mod ls;
 mod io;
 
@@ -90,26 +91,23 @@ fn main() {
                 return;
             }
 
-                eprintln!("select at least one monitor.");
+            let displ = ls::get_disp();
+
+            let selected: Vec<_> = numbers
+                .iter()
+                .map(|number| {
+                    number
+                        .checked_sub(1)
+                        .and_then(|i| displ.get(i))
+                })
+                .collect();
+
+            if selected.iter().any(|disp| disp.is_none()) {
+                eprintln!("One or more monitor numbers are out of range.");
                 return;
             }
 
-            if command == "disable" && numbers.len() != 1 {
-                eprintln!("disable accepts only one monitor.");
-                return;
-            }
-
-            let displ = ls::get_disp();
-
-            for number in numbers {
-            let displ = ls::get_disp();
-
-            for number in numbers {
-                let Some(disp) = number.checked_sub(1).and_then(|i| displ.get(i)) else {
-                    eprintln!("Monitor number {number} is out of range.");
-                    return;
-                };
-
+            for disp in selected.into_iter().flatten() {
                 if command == "enable" {
                     io::enable(disp);
                 } else {
