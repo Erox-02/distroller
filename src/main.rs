@@ -1,4 +1,4 @@
-
+mod shr;
 mod ls;
 mod io;
 
@@ -116,6 +116,51 @@ fn main() {
 
                 println!("{command} {}", disp.name);
             }
+        }
+
+        Some("use") => {
+            let Some(selection) = args.get(1) else {
+                eprintln!("++=> distroller use <monitor numbers> --gap <pixels>");
+                return;
+            };
+
+            let numbers: Result<Vec<usize>, _> =
+                selection.split(',').map(str::parse).collect();
+
+            let Ok(numbers) = numbers else {
+                eprintln!("not valid monitor number(s).");
+                return;
+            };
+
+            let gap = if let Some(i) = args.iter().position(|arg| arg == "--gap") {
+                let Some(value) = args.get(i + 1).and_then(|v| v.parse::<i32>().ok()) else {
+                    eprintln!("++=> distroller use <monitor numbers> --gap <pixels>");
+                    return;
+                };
+                value
+            } else {
+                10
+            };
+
+            let displ = ls::get_disp();
+
+            let selected: Vec<_> = numbers
+                .iter()
+                .map(|number| number.checked_sub(1).and_then(|i| displ.get(i)))
+                .collect();
+
+            if selected.is_empty() || selected.iter().any(|disp| disp.is_none()) {
+                eprintln!("One or more monitor numbers are out of range.");
+                return;
+            }
+
+            let selected: Vec<_> = selected.into_iter().flatten().collect();
+
+            for disp in &selected {
+                io::enable(disp);
+            }
+
+            shr::arange(&selected, gap);
         }
 
         Some("help") | None => {

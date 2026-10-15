@@ -23,7 +23,7 @@ pub fn refresh(disp: &Disp, refresh_rate: f32) {
         disp.name, disp.width, disp.height, refresh_rate
     );
 
-    println!("Running: {code}");
+    println!("running => {code}");
     hypr(&["eval", &code]);
 }
 
@@ -32,6 +32,15 @@ pub fn scale(disp: &Disp, scale: f32) {
     let code = format!(
         "hl.monitor({{ output = \"{}\", scale = {} }})",
         disp.name, scale
+    );
+    hypr(&["eval", &code]);
+}
+
+
+pub fn position(disp: &Disp, q: i32, r: i32) {
+    let code = format!(
+        "hl.monitor({{ output = \"{}\", position = \"{}x{}\", scale = {} }})",
+        disp.name, q, r, disp.scale
     );
     hypr(&["eval", &code]);
 }

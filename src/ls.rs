@@ -10,6 +10,7 @@ pub struct Disp {
     pub height: u16,
     pub focused: bool,
     pub disabled: bool,
+    #[serde(default)]
     pub available: Vec<String>,
     pub scale: f32,
 }
