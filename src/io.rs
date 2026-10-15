@@ -45,10 +45,11 @@ pub fn position(disp: &Disp, q: i32, r: i32) {
     hypr(&["eval", &code]);
 }
 
-pub fn sup_refresh(disp: &Disp, refresh_rate: f32) -> bool {
+pub fn sup_refresh(disp: &Disp, refresh_rate: f32) -> bool {    
     if !refresh_rate.is_finite() || refresh_rate <= 0.0 {
         return false;
     }
+
     let resolution = format!("{}x{}", disp.width, disp.height);
 
     disp.available.iter().any(|mode| {
@@ -58,7 +59,7 @@ pub fn sup_refresh(disp: &Disp, refresh_rate: f32) -> bool {
 
         let Some(rate) = rate
             .strip_suffix("Hz")
-            .and_then(|rate| rate.parse::<f32>().ok())
+            .and_then(|r| r.parse::<f32>().ok())
         else {
             return false;
         };

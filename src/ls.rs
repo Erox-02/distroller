@@ -10,7 +10,7 @@ pub struct Disp {
     pub height: u16,
     pub focused: bool,
     pub disabled: bool,
-    #[serde(default)]
+    #[serde(rename = "availableModes")]
     pub available: Vec<String>,
     pub scale: f32,
 }
