@@ -168,14 +168,18 @@ fn main() {
             println!("Commands ->\n");
             println!(" => list");
             println!("   To show the current moniters");
-            println!(" => scale <monitor number> <scale>");
+            println!(" => scale <moniter number> <scale>");
             println!("   to scale the moniters");
-            println!(" => refresh <monitor number> <hz>");
+            println!(" => refresh <moniter number> <hz>");
             println!("   to set specific refresh rate ");
-            println!(" => enable <monitor numbers>");
+            println!(" => enable <moniter numbers>");
             println!("   to enable one or more moniters");
-            println!(" => disable <monitor number>");
+            println!(" => disable <moniter number>");
             println!("   to disable one moniter");
+            println!(" => use <numbers of moniters> <gap> ");
+            println!("    to use multiple moniters as one ");
+            println!("Caution =>> if you swap the num of moniters , the orientation will swap too ")        
+        
         }
 
         Some(command) => eprintln!("Unknown command: {command}"),
