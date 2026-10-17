@@ -4,7 +4,7 @@ Display management cli for Hyprland, written in Rust. Distroller use hyprctl to 
 
 ## Demo video 
 
-<video src="./dis.mp4" controls="controls" style="max-width: 100%;"></video>
+<video controls src="dis.mp4" title="Demo_video"></video>
 
 ## Requirements
 
